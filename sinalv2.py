@@ -24,6 +24,7 @@ class Config:
             js = json.loads(f)
             username = js['username']
             password = js['password']
+            break
 
 
 def parse_payload(payload):
