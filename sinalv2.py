@@ -21,7 +21,7 @@ class NotLoginException(Exception):
 class Config:
     for f in ['account.json', 'account.example.json']:
         if os.path.isfile(f):
-            js = json.loads(f)
+            js = json.loads(open(f).read())
             username = js['username']
             password = js['password']
             break
