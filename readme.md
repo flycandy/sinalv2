@@ -2,9 +2,16 @@
 
 在windows, linux, mac下都可以运行 支持python3.4+
 
-## 执行
+# 安装
+```
+git clone https://github.com/flycandy/sinalv2
+cd sinalv2
+pip3 install -r requirements.txt
+vim account.example.json # 修改account.example.json 为自己的用户名密码
+python3 sinalv2.txt
+```
 
-# 新浪level2行情接口
+# 新浪level2行情接口 说明
 
 ## 登陆新浪
 
