@@ -38,7 +38,10 @@ kick | 1 就是把其余的请求踢掉, 0就是如果有其他地方登陆的�
 
 ## 使用token用websocket获取行情
 
-token需要定时更新. 每一个websocket只会持续大概3-5分钟. 当websocket disconnect之后, 需要重新请求一个token.
+获取token是一个websocket协议
 
-然后再次链接websocket
+ws://ff.sinajs.cn/wskt?token={token}&list={list}
 
+token必须是使用该{list}得到的token. 不然会报错
+
+token需要定时更新. 每一个websocket只会持续大概3-5分钟. 当websocket disconnect之后, 需要重新请求一个token. 然后再次链接websocket
