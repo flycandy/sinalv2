@@ -1,21 +1,8 @@
-import calendar
-from importlib import reload
-import logging
-import traceback
-from unittest import TestCase
-
-import pandas as pd
-import pytz
-import requests
-import shutil
-
 __author__ = 'tyz'
 
-from datetime import timedelta, tzinfo, datetime, date
-import asyncio
 import os
-import time
-import threading
+import logging
+import shutil
 
 
 def get_yzm(sess, url, path):
