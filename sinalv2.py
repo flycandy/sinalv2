@@ -200,11 +200,9 @@ class Sinaquote:
             return token
 
     def init_public_ip(self):
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        s.connect(("baidu.com", 80))
-        self.ip = s.getsockname()[0]
+        txt = requests.get('http://ipinfo.io/ip').text
+        self.ip = txt
         logging.info('public ip %s' % self.ip)
-        s.close()
 
     def get_public_ip(self):
         return self.ip
