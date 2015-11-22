@@ -8,7 +8,7 @@ git clone https://github.com/flycandy/sinalv2
 cd sinalv2
 pip3 install -r requirements.txt
 vim account.example.json # 修改account.example.json 为自己的用户名密码
-python3 sinalv2.txt
+python3 sinalv2.py
 ```
 
 # 新浪level2行情接口 说明
