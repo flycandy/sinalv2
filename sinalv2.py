@@ -241,7 +241,7 @@ def main():
     logging.basicConfig(level=logging.INFO)
     logging.getLogger("requests").setLevel(logging.WARNING)
 
-    cons = [Contract('sz150150'), Contract('sz150151')]
+    cons = [Contract('sh600000'), Contract('sz150151')]
     print('len cons {}'.format(len(cons)))
     instance = Sinaquote.get_instance()
     yield from instance.login()
