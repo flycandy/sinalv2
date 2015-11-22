@@ -19,11 +19,16 @@ class NotLoginException(Exception):
 
 
 class Config:
+    primary = 'primary'
+    advanced = 'advanced'
+
     for f in ['account.json', 'account.example.json']:
         if os.path.isfile(f):
             js = json.loads(open(f).read())
             username = js['username']
             password = js['password']
+            # sinalv2_payment_level = js['sinalv2_payment_level']
+            # assert sinalv2_payment_level in (advanced, primary)
             break
 
 
@@ -137,10 +142,10 @@ class Sinaquote:
 
     @asyncio.coroutine
     def login(self):
-        logging.debug('sina quota login')
+        logging.debug('sina quote login')
         islogin = yield from self.is_login()
         if islogin:
-            logging.info('sina quota already login')
+            logging.info('sina quote already login')
             return
         resp = self.sess.get(
             'http://login.sina.com.cn/sso/prelogin.php?'
@@ -172,7 +177,13 @@ class Sinaquote:
     def get_token(self, symbols):
         if not isinstance(symbols, list):
             symbols = [symbols]
-        query_type = 'A_hq'
+        # if Config.sinalv2_payment_level == Config.advanced:
+        #     query_type = 'A_hq'
+        # elif Config.sinalv2_payment_level == Config.primary:
+        query_type = 'hq_pjb'
+        # else:
+        #     assert False
+
         public_ip = self.get_public_ip()
         query_list = ','.join(symbols)
 
@@ -184,11 +195,15 @@ class Sinaquote:
                }
 
         def sess_get_wrapper():
+            logging.debug('dct {}'.format(dct))
+            logging.debug('token_url {}'.format(token_url))
+            logging.debug('cookie {}'.format(self.sess.cookies))
             return self.sess.get(token_url, params=dct).text
 
         loop = asyncio.get_event_loop()
         future1 = loop.run_in_executor(None, sess_get_wrapper)
         res = yield from future1
+        logging.debug('res {}'.format(res))
 
         if self.not_login_msg in res:
             raise NotLoginException()
@@ -200,7 +215,7 @@ class Sinaquote:
             return token
 
     def init_public_ip(self):
-        txt = requests.get('http://ipinfo.io/ip').text
+        txt = requests.get('http://ipinfo.io/ip').text.strip()
         self.ip = txt
         logging.info('public ip %s' % self.ip)
 
@@ -241,7 +256,7 @@ def main():
     logging.basicConfig(level=logging.INFO)
     logging.getLogger("requests").setLevel(logging.WARNING)
 
-    cons = [Contract('sh600000'), Contract('sz150151')]
+    cons = [Contract('sh600000'), Contract('sz150150')]
     print('len cons {}'.format(len(cons)))
     instance = Sinaquote.get_instance()
     yield from instance.login()
