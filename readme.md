@@ -1,33 +1,31 @@
-#软件使用 该软件需要自行购买新浪的level2标准版
-
-在windows, linux, mac下都可以运行 支持python3.4+
+# 软件使用 该软件需要自行购买新浪的level2标准版 (900+每年)
+ 
+版本要求 Python3.4+
 
 # 安装
 ```
 git clone https://github.com/flycandy/sinalv2
 cd sinalv2
-pip3 install -r requirements.txt
+pip install -r requirements.txt
 vim account.example.json # 修改account.example.json 为自己的用户名密码
-python3 sinalv2.py
+python sinalv2.py
 ```
 
 # 新浪level2行情接口 说明
 
-## 登陆新浪
-
-不过新浪登陆后, 一个cookie能够使用很久. 所以, 就算不写自动登陆的脚本也是没有问题的, 可以从浏览器取得cookie, 然后存在文件里, 每次从文件里读取cookie即可
+## Step 1 登陆新浪
 
 登陆脚本参考该页面 Reference https://gist.github.com/mrluanma/3621775
 
-## 请求一个token
+## Step 2 请求一个token
 
 
-URL:     'https://current.sina.com.cn/auth/api/jsonp.php/varxxxl/AuthSign_Service.getSignCode'
-方法: Post
+请求地址: https://current.sina.com.cn/auth/api/jsonp.php/varxxxl/AuthSign_Service.getSignCode
+方法: Get
 
 字段       | 说明 
 ---------|-------
-query | query_type
+query_type | A_hq (A股行情)
  ip  | 当前机器的公网IP
 list | 请求的查看股票的列表 
 kick | 1 就是把其余的请求踢掉, 0就是如果有其他地方登陆的话. 返回错误 

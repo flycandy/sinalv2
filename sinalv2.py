@@ -27,8 +27,6 @@ class Config:
             js = json.loads(open(f).read())
             username = js['username']
             password = js['password']
-            # sinalv2_payment_level = js['sinalv2_payment_level']
-            # assert sinalv2_payment_level in (advanced, primary)
             break
 
 
@@ -177,12 +175,7 @@ class Sinaquote:
     def get_token(self, symbols):
         if not isinstance(symbols, list):
             symbols = [symbols]
-        # if Config.sinalv2_payment_level == Config.advanced:
-        #     query_type = 'A_hq'
-        # elif Config.sinalv2_payment_level == Config.primary:
-        query_type = 'hq_pjb'
-        # else:
-        #     assert False
+        query_type = 'A_hq'
 
         public_ip = self.get_public_ip()
         query_list = ','.join(symbols)
