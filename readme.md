@@ -1,4 +1,8 @@
-# 软件使用 该软件需要自行购买新浪的level2标准版 (900+每年)
+# Sina Level2 Quote Python API
+该软件需要自行购买新浪的level2标准版 (168每月, 998每年)
+
+购买地址 http://stock.finance.sina.com.cn/stock/buy.php
+
  
 版本要求 Python3.4+
 
